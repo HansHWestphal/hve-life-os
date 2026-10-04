@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/HansHWestphal/hve-life-os/diary/schema.json",
+  "title": "EsopeiraDiaryEntry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "started_at", "kind", "conditions", "did", "happened", "not_concluded"],
+  "properties": {
+    "id": {"type": "string", "description": "Stable entry id. Local. Not a secret."},
+    "started_at": {"type": "string", "description": "Local ISO time. Written during or immediately after."},
+    "ended_at": {"type": "string"},
+    "place": {"type": "string"},
+    "wealth": {
+      "type": "string",
+      "enum": ["time", "physical", "mental", "social", "financial", "none"]
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["sitting", "brief", "drill", "ordinary"]
+    },
+    "conditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "body": {"type": "string", "description": "Sleep, food, pain, substances."},
+        "mind": {"type": "string", "description": "Mood at start, quality of attention."},
+        "sky": {"type": "string", "description": "Weather, moon phase, moon sign if a brief supplied it."},
+        "sources": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Chart, book, page, or none."
+        }
+      }
+    },
+    "held": {"type": "string", "description": "What was impressed or attended, if anything."},
+    "did": {"type": "string", "description": "What was actually done. Clock it if it ran long."},
+    "happened": {"type": "string", "description": "Impressions. Separate from any forecast wording."},
+    "matched": {"type": "string", "description": "Optional. Only against a prior card."},
+    "missed": {"type": "string"},
+    "not_concluded": {"type": "string", "description": "Required. A match is not a law."},
+    "result_later": {"type": "string", "description": "Empty until a later entry fills it."},
+    "prior_id": {"type": "string", "description": "Points at an earlier entry when this row is the after-action review."}
+  }
+}
